@@ -1,10 +1,6 @@
 import java.util.*;
 
-/**
- * 
- * @author Skylar Smoker
- *
- */
+
 public class PQueue extends AbstractCollection<Object> {
 	
 	private static class DefaultComparator implements Comparator<Object> {
