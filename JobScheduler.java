@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class JobScheduler {
@@ -19,12 +20,15 @@ public class JobScheduler {
 		}
 		catch(Exception e)
 		{
-			System.out.println("Could not find File");
+			System.out.println("Could not find file");
 		}
 	}
 	
 	public void readFile()
 	{
+		
+		PQueue pq = new PQueue(Collections.reverseOrder());
+		
 		while(sc.hasNext())
 		{
 			int job = sc.nextInt();
@@ -32,6 +36,9 @@ public class JobScheduler {
 			int arrival = sc.nextInt();
 			int duration = sc.nextInt();
 			
+			Job send = new Job(job, priority, arrival, duration);
+			pq.add(priority);
+						
 			System.out.print(job + ", " + priority + ", " +arrival+ ", " + duration + "\n");
 			
 		}
