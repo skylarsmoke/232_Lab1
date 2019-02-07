@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -27,6 +28,8 @@ public class JobScheduler {
 	public void readFile()
 	{
 		
+		
+		
 		PQueue pq = new PQueue(Collections.reverseOrder());
 		
 		while(sc.hasNext())
@@ -36,10 +39,16 @@ public class JobScheduler {
 			int arrival = sc.nextInt();
 			int duration = sc.nextInt();
 			
-			Job send = new Job(job, priority, arrival, duration);
-			pq.add(priority);
-						
-			System.out.print(job + ", " + priority + ", " +arrival+ ", " + duration + "\n");
+			Job job1 = new Job(job, priority, arrival, duration);
+			
+			pq.add(job1);
+			
+			
+				System.out.println(pq.max().getArrival());
+				pq.remove();
+			
+								
+			System.out.print(job + ", " + priority + ", " + arrival + ", " + duration + "\n");
 			
 		}
 		sc.close();

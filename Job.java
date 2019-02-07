@@ -9,9 +9,7 @@ public class Job {
 	int duration = 0;
 	int waitTime = 0;
 	
-	int count = 0;
-	int[][] array;
-	
+			
 	public Job(int num, int priority, int arrival, int runTime) {
 		this.num = num;
 		this.priority = priority;
@@ -21,19 +19,9 @@ public class Job {
 			
 	}
 	
-	public void makeArray() {
-		array[count][0] = this.num;
-		array[count][1] = this.priority;
-		array[count][2] = this.arrival;
-		array[count][3] = this.runTime;
 		
-		count++;
-		
-		
-	}
-	
 	public int getNum(){
-		return this.num;
+		return num;
 	}
 	
 	public int getPriority() {

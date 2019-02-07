@@ -1,23 +1,23 @@
 import java.util.*;
 
 
-public class PQueue extends AbstractCollection<Object> {
+public class PQueue extends AbstractCollection<Job> {
 	
-	private static class DefaultComparator implements Comparator<Object> {
+	private static class DefaultComparator implements Comparator<Job> {
 
 		
-		public int compare(Object o1, Object o2) {
+		public int compare(Job o1, Job o2) {
 			
 			return ((Comparable) 01).compareTo(o2);
 		}
 		
 	}
 	
-	private Comparator<Object> comp = new DefaultComparator();
+	private Comparator<Job> comp = new DefaultComparator();
     private int size;
-    private ArrayList<Object> list;
+    private ArrayList<Job> list;
     
-    private class PQItr implements Iterator<Object> {
+    private class PQItr implements Iterator<Job> {
     	
     	private int cursor = 1;
 
@@ -26,7 +26,7 @@ public class PQueue extends AbstractCollection<Object> {
 			return cursor <= size;
 		}
 
-		public Object next() {
+		public Job next() {
 			
 			return list.get(cursor);
 		}
@@ -35,20 +35,20 @@ public class PQueue extends AbstractCollection<Object> {
     
     public PQueue() {
     	
-    	list = new ArrayList<Object>(30);
+    	list = new ArrayList<Job>(30);
     	list.add(null);
     	size = 0;
     	
     }
     
-    public PQueue(Comparator<Object> e) {
+    public PQueue(Comparator<Job> e) {
     	
     	this();
     	comp = e;
     	
     }
 	
-    public PQueue(Collection<Object> e) {
+    public PQueue(Collection<Job> e) {
     	
     	this();
     	list.addAll(e);
@@ -62,7 +62,7 @@ public class PQueue extends AbstractCollection<Object> {
     	
     }
     
-    public boolean add(Object e) {
+    public boolean add(Job e) {
     	
     	list.add(e);
     	size++;
@@ -88,11 +88,11 @@ public class PQueue extends AbstractCollection<Object> {
     	return size == 0;
     }
     
-    public Object remove() {
+    public Job remove() {
     	
     	if (!isEmpty()) {
     		
-    		Object grab = list.get(1);
+    		Job grab = list.get(1);
     		
     		list.set(1, list.get(size));
     		list.remove(size);
@@ -112,13 +112,14 @@ public class PQueue extends AbstractCollection<Object> {
     	
     }
     
-    public Object max() {
+    
+    public Job max() {
     	
     	return list.get(1);
     	
     }
     
-    public Iterator iterator() {
+    public Iterator<Job> iterator() {
     	
     	return new PQItr();
     	
@@ -126,7 +127,7 @@ public class PQueue extends AbstractCollection<Object> {
 	
 	private void heapify(int num) {
 		
-		Object last = list.get(num);
+		Job last = list.get(num);
 		int child, k = num;
 		
 		while (2 * k <= size) {
