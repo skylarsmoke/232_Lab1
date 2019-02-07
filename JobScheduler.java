@@ -1,6 +1,4 @@
 import java.io.File;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class JobScheduler {
@@ -17,21 +15,21 @@ public class JobScheduler {
 		try
 		{
 			sc = new Scanner(in);
-			readFile();
+			
 		}
 		catch(Exception e)
 		{
 			System.out.println("Could not find file");
 		}
+		readFile();
 	}
 	
 	public void readFile()
 	{
 		
 		
-		
-		PQueue pq = new PQueue(Collections.reverseOrder());
-		
+		PQueue pq = new PQueue();
+				
 		while(sc.hasNext())
 		{
 			int job = sc.nextInt();
@@ -39,18 +37,36 @@ public class JobScheduler {
 			int arrival = sc.nextInt();
 			int duration = sc.nextInt();
 			
-			Job job1 = new Job(job, priority, arrival, duration);
+			pq.add(new Job(job, priority, arrival, duration));
 			
-			pq.add(job1);
-			
-			
-				System.out.println(pq.max().getArrival());
-				pq.remove();
-			
-								
-			System.out.print(job + ", " + priority + ", " + arrival + ", " + duration + "\n");
 			
 		}
+		
+		runJob runJob = new runJob(pq.max());
+		
+		while (!pq.isEmpty()) {
+			if (runJob.arrived()) {
+				
+			}
+			
+			runJob.addSec();
+			if (runJob.finished()) {
+				System.out.println("Job#: " + pq.max().getNum() + ", Priority: " + pq.max().getPriority() + ", Arrival: " + pq.max().getArrival() + ", Seconds Elapsed: " + runJob.getElapsed());
+				pq.remove();
+			}
+			System.out.println(runJob.getElapsed());
+					
+		}
+		
+		
+		
+		
+		/**
+		 * if (pq.size() < count) {
+				pq.remove(2);
+			}
+		 */
+		
 		sc.close();
 	}
 	

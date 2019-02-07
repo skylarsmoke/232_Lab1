@@ -8,7 +8,7 @@ public class PQueue extends AbstractCollection<Job> {
 		
 		public int compare(Job o1, Job o2) {
 			
-			return ((Comparable) 01).compareTo(o2);
+			return o2.getPriority() - o1.getPriority();
 		}
 		
 	}
@@ -101,6 +101,30 @@ public class PQueue extends AbstractCollection<Job> {
     		if (size > 1) {
     			
     			heapify(1);
+    			
+    		}
+    		
+    		return grab;
+    		
+    	}
+    	
+    	return null;
+    	
+    }
+    
+public Job remove(int job) {
+    	
+    	if (!isEmpty()) {
+    		
+    		Job grab = list.get(job);
+    		
+    		list.set(job, list.get(size));
+    		list.remove(size);
+    		size--;
+    		
+    		if (size > job) {
+    			
+    			heapify(job);
     			
     		}
     		

@@ -21,7 +21,7 @@ public class Job {
 	
 		
 	public int getNum(){
-		return num;
+		return this.num;
 	}
 	
 	public int getPriority() {
