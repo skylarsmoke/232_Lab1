@@ -47,16 +47,22 @@ public class JobScheduler {
 		while (!pq.isEmpty()) {
 			
 			if (runJob.seconds == pq.max().getArrival()) {
+				runJob.jobStart();
 				System.out.println("Arrived");
 			}
 			
-			runJob.addSec();
+			if (runJob.seconds == runJob.startTime + pq.max().getRunTime()) {
+				runJob.jobEnd();
+				
+			}
+			
+			
 			if (runJob.finished()) {
 				System.out.println("Job#: " + pq.max().getNum() + ", Priority: " + pq.max().getPriority() + ", Arrival: " + pq.max().getArrival() + ", Seconds Elapsed: " + runJob.getElapsed());
 				pq.remove();
-				runJob.seconds = 0;
+				
 			}
-			
+			runJob.addSec();
 			System.out.println(runJob.getElapsed());
 					
 		}
@@ -72,6 +78,7 @@ public class JobScheduler {
 		String i = input.next();
 		
 		JobScheduler js = new JobScheduler(i);
+		
 		
 		input.close();
 	}
