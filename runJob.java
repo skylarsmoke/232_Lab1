@@ -8,6 +8,7 @@ public class runJob {
 	int startTime = 0;
 	int executionTime = 0;
 	boolean end = false;
+	int waitTime = 0;
 	
 	public runJob(Job max) {
 		this.arrival = max.getArrival();
@@ -15,6 +16,9 @@ public class runJob {
 				
 	}
 	
+	public void changeArrival(Job max) {
+		this.arrival = max.getArrival();
+	}
 	
 	public void addSec() {
 		this.seconds++;
@@ -51,6 +55,10 @@ public class runJob {
 		return this.executionTime;
 	}
 	
+	public int getWaitTime() {
+		this.waitTime = this.startTime - this.arrival; 
+		return this.waitTime;
+	}
 	
 	public boolean finished() {
 		if (this.end) {
