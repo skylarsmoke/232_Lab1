@@ -6,6 +6,7 @@ public class runJob {
 	int runTime;
 	int endTime = 0;
 	int startTime = 0;
+	int executionTime = 0;
 	boolean end = false;
 	
 	public runJob(Job max) {
@@ -27,6 +28,10 @@ public class runJob {
 		return this.arrival == this.seconds;
 	}
 	
+	public int getArrival() {
+		return this.arrival;
+	}
+	
 	public void jobStart() {
 		this.startTime = this.seconds;
 		
@@ -37,7 +42,15 @@ public class runJob {
 		this.end = true;
 	}
 	
-	int executionTime = endTime - startTime;
+	public void resetEndTime() {
+		this.end = false;
+	}
+	
+	public int getExecutionTime() {
+		this.executionTime = this.endTime - this.startTime;
+		return this.executionTime;
+	}
+	
 	
 	public boolean finished() {
 		if (this.end) {
