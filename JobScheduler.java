@@ -46,7 +46,7 @@ public class JobScheduler {
 		
 		while (!pq.isEmpty()) {
 			
-			if (runJob.arrived()) {
+			if (runJob.seconds == pq.max().getArrival()) {
 				System.out.println("Arrived");
 			}
 			
