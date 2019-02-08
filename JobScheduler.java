@@ -2,14 +2,18 @@ import java.io.File;
 import java.util.Scanner;
 
 public class JobScheduler {
+	
+	// initializes scanner
 	Scanner sc;
 	
+	// initializes JobScheduler which takes in file name
 	public JobScheduler(String in) {
 		
 		File inf = new File(in);
 		openFile(inf);
 	}
 	
+	// initializes openFile using the new File inf
 	public void openFile(File in)
 	{
 		try
@@ -18,7 +22,7 @@ public class JobScheduler {
 			
 		}
 		catch(Exception e)
-		{
+		{ // tells user if file can not be found
 			System.out.println("Could not find file");
 		}
 		readFile();
@@ -29,6 +33,7 @@ public class JobScheduler {
 		
 		
 		PQueue pq = new PQueue();
+		PQueueArrival pqA = new PQueueArrival();
 				
 		while(sc.hasNext())
 		{
@@ -37,43 +42,61 @@ public class JobScheduler {
 			int arrival = sc.nextInt();
 			int duration = sc.nextInt();
 			
-			pq.add(new Job(job, priority, arrival, duration));
-			
+			pqA.add(new Job(job, priority, arrival, duration));
 			
 		}
 		
+		int seconds = 0;
+		int startTime = 0;
+		int endTime = 0;
+			
+		
+		pq.add(pqA.max());
+		pqA.remove();
 		runJob runJob = new runJob(pq.max());
 		
-		while (!pq.isEmpty()) {
+		
+		
+		while (seconds != 2000) {
+			
+			if (seconds == pqA.max().getArrival()) {
+				pq.add(pqA.max());
+				pqA.remove();
+				System.out.println("yo");
+			}
 			
 			if (runJob.end == true) {
-				runJob.jobStart();
+				startTime = seconds;
+				//runJob.jobStart();
 				runJob.changeArrival(pq.max());
 				runJob.end = false;
 			}
-			if (runJob.seconds == pq.max().getArrival()) {
-				runJob.jobStart();
-				//System.out.println("Arrived");
+			
+			if (seconds == pq.max().getArrival()) {
+				startTime = seconds;
+				//runJob.jobStart();
 			}
 			
 			
 			
-			if (runJob.seconds == runJob.startTime + pq.max().getRunTime()) {
+			if (seconds == startTime + pq.max().getRunTime()) {
 				runJob.jobEnd();
+				endTime = startTime + pq.max().getRunTime();
 				
 			}
 			
 			
 			if (runJob.finished()) {
-				System.out.println("Job#: " + pq.max().getNum() + ", Priority: " + pq.max().getPriority() + ", Arrival: " + pq.max().getArrival() + "sec" + ", Wait Time: " + runJob.getWaitTime() + ", Execution Time: " + runJob.getExecutionTime() + "sec" + ", Seconds Elapsed: " + runJob.getElapsed() + "sec");
+				System.out.println("Job#: " + pq.max().getNum() + ", Priority: " + pq.max().getPriority() + ", Arrival: " + pq.max().getArrival() + "sec" + ", Wait Time: " + runJob.getWaitTime(startTime, pq.max().getArrival()) + ", Execution Time: " + runJob.getExecutionTime(startTime, endTime) + "sec" + ", Seconds Elapsed: " + seconds + "sec");
 				pq.remove();
 				
 				//runJob.resetEndTime();
 				
 			}
 			
-			runJob.addSec();
-			//System.out.println(runJob.getElapsed());
+			seconds++;
+			//runJob.addSec();
+			System.out.println(seconds);
 					
 		}
 		

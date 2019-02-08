@@ -28,10 +28,6 @@ public class runJob {
 		return this.seconds;
 	}
 	
-	public boolean arrived() {
-		return this.arrival == this.seconds;
-	}
-	
 	public int getArrival() {
 		return this.arrival;
 	}
@@ -42,7 +38,7 @@ public class runJob {
 	}
 	
 	public void jobEnd() {
-		this.endTime = this.seconds;
+		//this.endTime = this.seconds;
 		this.end = true;
 	}
 	
@@ -50,13 +46,13 @@ public class runJob {
 		this.end = false;
 	}
 	
-	public int getExecutionTime() {
-		this.executionTime = this.endTime - this.startTime;
+	public int getExecutionTime(int startTime, int endTime) {
+		this.executionTime = endTime - startTime;
 		return this.executionTime;
 	}
 	
-	public int getWaitTime() {
-		this.waitTime = this.startTime - this.arrival; 
+	public int getWaitTime(int startTime, int arrival) {
+		this.waitTime = startTime - arrival; 
 		return this.waitTime;
 	}
 	
