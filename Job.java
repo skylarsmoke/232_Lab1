@@ -36,11 +36,4 @@ public class Job {
 		return this.runTime;
 	}
 	
-	public void runOneSec() {
-		this.duration++;
-	}
-	
-	public void waitOneSec() {
-		this.waitTime++;
-	}
 }

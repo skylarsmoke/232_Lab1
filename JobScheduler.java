@@ -45,27 +45,22 @@ public class JobScheduler {
 		runJob runJob = new runJob(pq.max());
 		
 		while (!pq.isEmpty()) {
+			
 			if (runJob.arrived()) {
-				
+				System.out.println("Arrived");
 			}
 			
 			runJob.addSec();
 			if (runJob.finished()) {
 				System.out.println("Job#: " + pq.max().getNum() + ", Priority: " + pq.max().getPriority() + ", Arrival: " + pq.max().getArrival() + ", Seconds Elapsed: " + runJob.getElapsed());
 				pq.remove();
+				runJob.seconds = 0;
 			}
+			
 			System.out.println(runJob.getElapsed());
 					
 		}
 		
-		
-		
-		
-		/**
-		 * if (pq.size() < count) {
-				pq.remove(2);
-			}
-		 */
 		
 		sc.close();
 	}

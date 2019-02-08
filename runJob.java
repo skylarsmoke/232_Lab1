@@ -17,7 +17,6 @@ public class runJob {
 	}
 	
 	public int getElapsed() {
-		
 		return this.seconds;
 	}
 	
